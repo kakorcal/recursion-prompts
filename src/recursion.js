@@ -61,10 +61,11 @@ var sumBelow = function(n) {
 // 6. Get the integers in range (x, y).
 // Example:  range(2, 9);  // [3, 4, 5, 6, 7, 8]
 var range = function(x, y) {
-  if(x === y){
-    return [];
+  var num = x < y ? x + 1 : x - 1;
+  if((num < y || num > y) && x !== y){
+    return [num].concat(range(num, y));
   }else{
-    return [++x].concat(range(x, y));
+    return [];
   }
 };
 
