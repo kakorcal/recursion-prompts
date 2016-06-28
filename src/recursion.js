@@ -121,13 +121,24 @@ var multiply = function(x, y) {
   if(y === 0){
     return 0;
   }else{
-    return y > 0 ? x + multiply(x, --y) : x + multiply(x, ++y);
+    return y > 0 ? x + multiply(x, --y) : -(x) + multiply(x, ++y);
   }
 };
 
 // 13. Write a function that divides two numbers without using the / operator  or
 // JavaScript's Math object.
+  // 8/2 === 8-2-2
+  // 8/2 === count(2+2+2+2)
 var divide = function(x, y) {
+  if(x === 0 && y === 0) return NaN;
+
+  if(x < y || (y < 0 && x > y)){
+    return 0;
+  }else if(x === y){
+    return 1;
+  }else{
+    return y > 0 ? 1 + divide(x - y, y) : -1 + divide(x + y, y);
+  }
 };
 
 // 14. Find the greatest common divisor (gcd) of two positive numbers.  The GCD of two
@@ -144,6 +155,13 @@ var gcd = function(x, y) {
 // compareStr('', '') // true
 // compareStr('tomato', 'tomato') // true
 var compareStr = function(str1, str2) {
+  if(str1[0] !== str2[0]){
+    return false;
+  }else if(!str1 && !str2){
+    return true;
+  }else {
+    return compareStr(str1.slice(1), str2.slice(1));
+  }
 };
 
 // 16. Write a function that accepts a string and creates an array where each letter
