@@ -343,6 +343,14 @@ var capitalizeFirst = function(array) {
 // };
 // nestedEvenSum(obj1); // 10
 var nestedEvenSum = function(obj) {
+  let sum = 0;
+  for(let p in obj){
+    if(obj[p] % 2 === 0) sum += obj[p];
+    if(typeof obj[p] === 'object'){
+      sum += nestedEvenSum(obj[p]);
+    }
+  }
+  return sum;
 };
 
 // 29. Flatten an array containing nested arrays.
@@ -355,7 +363,18 @@ var flatten = function(arrays) {
 
 // 30. Given a string, return an object containing tallies of each letter.
 // letterTally('potato'); // {'p':1, 'o':2, 't':2, 'a':1}
-var letterTally = function(str, obj) {
+var letterTally = function(str) {
+  let o = arguments[1] || {};
+  if(!str.length){
+    return o;
+  }else{
+    if(!o[str[0]]){
+      o[str[0]] = 1;
+    }else{
+      o[str[0]]++;
+    }
+    return letterTally(str.slice(1), o);
+  }
 };
 
 // 31. Eliminate consecutive duplicates in a list.  If the list contains repeated
@@ -364,6 +383,7 @@ var letterTally = function(str, obj) {
 // Example: compress([1, 2, 2, 3, 4, 4, 5, 5, 5]) // [1, 2, 3, 4, 5]
 // Example: compress([1, 2, 2, 3, 4, 4, 2, 5, 5, 5, 4, 4]) // [1, 2, 3, 4, 2, 5, 4]
 var compress = function(list) {
+  
 };
 
 // 32. Augument every element in a list with a new value where each element is an array
