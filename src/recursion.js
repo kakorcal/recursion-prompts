@@ -315,11 +315,22 @@ var nthFibo = function(n) {
 // var words = ['i', 'am', 'learning', 'recursion'];
 // capitalizedWords(words); // ['I', 'AM', 'LEARNING', 'RECURSION']
 var capitalizeWords = function(input) {
+  if(!input.length){
+    return [];
+  }else{
+    return [input[0].toUpperCase()].concat(capitalizeWords(input.slice(1)));
+  }
 };
 
 // 27. Given an array of strings, capitalize the first letter of each index.
 // capitalizeFirst(['car', 'poop', 'banana']); // ['Car', 'Poop', 'Banana']
 var capitalizeFirst = function(array) {
+  if(!array.length){
+    return [];
+  }else{
+    return [array[0][0].toUpperCase() + array[0].substring(1).toLowerCase()]
+           .concat(capitalizeFirst(array.slice(1)));
+  }
 };
 
 // 28. Return the sum of all even numbers in an object containing nested objects.
@@ -337,6 +348,9 @@ var nestedEvenSum = function(obj) {
 // 29. Flatten an array containing nested arrays.
 // Example: flatten([1,[2],[3,[[4]]],5]); // [1,2,3,4,5]
 var flatten = function(arrays) {
+  return arrays.reduce((acc, cur)=>{
+    return Array.isArray(cur) ? acc.concat(flatten(cur)) : acc.concat(cur);
+  }, []);
 };
 
 // 30. Given a string, return an object containing tallies of each letter.
