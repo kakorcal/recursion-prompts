@@ -75,6 +75,13 @@ var range = function(x, y) {
 // Example:  exponent(4,3);  // 64
 // https://www.khanacademy.org/computing/computer-science/algorithms/recursive-algorithms/a/computing-powers-of-a-number
 var exponent = function(base, exp) {
+  if(!exp){
+    return 1;
+  }else if(exp > 0){
+    return base * exponent(base, --exp);
+  }else if(exp < 0){
+    return (1 / base) * exponent(base, ++exp);
+  }
 };
 
 // 8. Determine if a number is a power of two.
@@ -103,6 +110,7 @@ var palindrome = function(string) {
 // modulo(5,2) // 1
 // modulo(17,5) // 2
 // modulo(22,6) // 4
+// TODO: make function work for divide(-4, -2);
 var modulo = function(x, y) {
   if(x === 0 && y === 0) return NaN;
   if(x < y || (x < 0 && y < 0)){
@@ -129,6 +137,7 @@ var multiply = function(x, y) {
 // JavaScript's Math object.
   // 8/2 === 8-2-2
   // 8/2 === count(2+2+2+2)
+// TODO: make function work for divide(-4, -2);
 var divide = function(x, y) {
   if(x === 0 && y === 0) return NaN;
 
@@ -210,6 +219,11 @@ var countOccurrence = function(array, value) {
 // 20. Write a recursive version of map.
 // rMap([1,2,3], timesTwo); // [2,4,6]
 var rMap = function(array, callback) {
+  if(!array.length){
+    return [];
+  }else{
+    return [callback(array[0])].concat(rMap(array.slice(1), callback));
+  }
 };
 
 // 21. Write a function that counts the number of times a key occurs in an object.
@@ -217,6 +231,7 @@ var rMap = function(array, callback) {
 // countKeysInObj(testobj, 'r') // 1
 // countKeysInObj(testobj, 'e') // 2
 var countKeysInObj = function(obj, key) {
+
 };
 
 // 22. Write a function that counts the number of times a value occurs in an object.
