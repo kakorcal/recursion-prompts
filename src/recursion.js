@@ -88,7 +88,16 @@ var exponent = function(base, exp) {
 // powerOfTwo(1); // true
 // powerOfTwo(16); // true
 // powerOfTwo(10); // false
+  // 2^x = n
+  // 2^4 = 16
 var powerOfTwo = function(n) {
+  if(n === 1){
+    return true;
+  }else if(n < 1){
+    return false;
+  }else{
+    return powerOfTwo(n / 2);
+  }
 };
 
 // 9. Write a function that accepts a string a reverses it.
@@ -227,11 +236,31 @@ var rMap = function(array, callback) {
 };
 
 // 21. Write a function that counts the number of times a key occurs in an object.
-// var testobj = {'e': {'x':'y'}, 't':{'r': {'e':'r'}, 'p': {'y':'r'}},'y':'e'};
+// var testobj = {
+//   'e': {
+//     'x':'y'
+//   }, 
+//   't':{
+//     'r': {
+//       'e':'r'
+//     }, 
+//     'p': {
+//       'y':'r'
+//     }
+//   },
+//   'y':'e'
+// };
 // countKeysInObj(testobj, 'r') // 1
 // countKeysInObj(testobj, 'e') // 2
 var countKeysInObj = function(obj, key) {
-
+  let count = 0;
+  for(let p in obj){
+    if(p === key) count++;
+    if(typeof obj[p] === 'object'){ 
+      count += countKeysInObj(obj[p], key);
+    }
+  }
+  return count;
 };
 
 // 22. Write a function that counts the number of times a value occurs in an object.
@@ -239,11 +268,31 @@ var countKeysInObj = function(obj, key) {
 // countValuesInObj(testobj, 'r') // 2
 // countValuesInObj(testobj, 'e') // 1
 var countValuesInObj = function(obj, value) {
+  let count = 0;
+  for(let p in obj){
+    if(obj[p] === value) count++;
+    if(typeof obj[p] === 'object'){ 
+      count += countValuesInObj(obj[p], value);
+    }
+  }
+  return count;
+
 };
 
 // 23. Find all keys in an object (and nested objects) by a provided name and rename
 // them to a provided new name while preserving the value stored at that key.
 var replaceKeysInObj = function(obj, key, newKey) {
+  for(let p in obj){
+    if(p === key) {
+      let val = obj[key];
+      delete obj[key];
+      obj[newKey] = val;
+    }
+    if(typeof obj[p] === 'object'){ 
+      replaceKeysInObj(obj[p], key, newKey);
+    }
+  }
+  return obj;
 };
 
 // 24. Get the first n Fibonacci numbers.  In the Fibonacci Sequence, each subsequent
