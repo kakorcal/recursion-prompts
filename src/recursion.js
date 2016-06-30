@@ -165,6 +165,7 @@ var divide = function(x, y) {
 // http://www.cse.wustl.edu/~kjg/cse131/Notes/Recursion/recursion.html
 // https://www.khanacademy.org/computing/computer-science/cryptography/modarithmetic/a/the-euclidean-algorithm
 var gcd = function(x, y) {
+
 };
 
 // 15. Write a function that compares each character of two strings and returns true if
@@ -301,7 +302,41 @@ var replaceKeysInObj = function(obj, key, newKey) {
 // fibonacci(5);  // [0, 1, 1, 2, 3, 5]
 // Note:  The 0 is not counted.
 var fibonacci = function(n) {
+  if(n < 0){
+    return [];
+  }else{
+    return [nthFibo(n)].concat(fibonacci(n - 1).reverse()).reverse();
+  }
 };
+
+//***************************************************************************
+  // alternate solution
+    // var fibonacci = function(num) {
+    //   let arr = [];
+    //   let cache = {};
+
+    //   (function fib(n){
+    //     let value;
+    //     if(cache[n]){
+    //       value = cache[n];
+    //     }else{
+    //       if(n < 2){
+    //         value = n;
+    //       }else{
+    //         value = fib(n - 1) + fib(n - 2);
+    //       }
+    //       cache[n] = value;
+    //     }
+    //     return value;
+    //   })(num);
+
+    //   for(let p in cache){
+    //     arr.push(cache[p]);
+    //   }
+
+    //   return arr;
+    // };
+//***************************************************************************
 
 // 25. Return the Fibonacci number located at index n of the Fibonacci sequence.
 // [0,1,1,2,3,5,8,13,21]
@@ -309,6 +344,20 @@ var fibonacci = function(n) {
 // nthFibo(7); // 13
 // nthFibo(3); // 2
 var nthFibo = function(n) {
+  if(!nthFibo.cache) nthFibo.cache = {};
+
+  if(n < 0){
+    return null;
+  }else if(nthFibo.cache[n]){
+    // is it cached?
+    return nthFibo.cache[n];
+  }else if(n < 2){
+    // store 0 and 1 into cache
+    return nthFibo.cache[n] = n;
+  }else{
+    // return the value inside the cache
+    return nthFibo.cache[n] = nthFibo(n - 1) + nthFibo(n - 2);
+  }
 };
 
 // 26. Given an array of words, return a new array containing each word capitalized.
