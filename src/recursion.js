@@ -111,7 +111,16 @@ var reverse = function(string) {
 
 // 10. Write a function that determines if a string is a palindrome.
 var palindrome = function(string) {
-  
+  // strip spaces
+  let str = string.replace(/\s/g, '').toLowerCase();
+  let [first, rest, last] = [str[0], str.substring(1, str.length - 1), str[str.length - 1]];
+  if(first !== last){
+    return false;
+  }else if(rest.length === 1 || (rest.length === 2 && first === last)){
+    return true;
+  }else if(first === last){
+    return palindrome(rest); 
+  }
 };
 
 // 11. Write a function that returns the remainder of x divided by y without using the
@@ -119,7 +128,7 @@ var palindrome = function(string) {
 // modulo(5,2) // 1
 // modulo(17,5) // 2
 // modulo(22,6) // 4
-// TODO: make function work for divide(-4, -2);
+// TODO: make function work for modulo(-4, -2);
 var modulo = function(x, y) {
   if(x === 0 && y === 0) return NaN;
   if(x < y || (x < 0 && y < 0)){
@@ -165,9 +174,23 @@ var divide = function(x, y) {
 // http://www.cse.wustl.edu/~kjg/cse131/Notes/Recursion/recursion.html
 // https://www.khanacademy.org/computing/computer-science/cryptography/modarithmetic/a/the-euclidean-algorithm
 var gcd = function(x, y) {
-
+  // return null for negative integers
+  if(x < 0 || y < 0) return null;
+    
+  if(x > y){
+    if(x % y === 0){
+      return y;
+    }else{
+      return gcd(y, x % y);
+    }
+  }else{
+    if(y % x === 0){
+      return x;
+    }else{
+      return gcd(x, y % x);
+    }
+  }
 };
-
 // 15. Write a function that compares each character of two strings and returns true if
 // both are identical.
 // compareStr('house', 'houses') // false
