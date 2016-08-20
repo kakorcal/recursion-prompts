@@ -128,15 +128,30 @@ var palindrome = function(string) {
 // modulo(5,2) // 1
 // modulo(17,5) // 2
 // modulo(22,6) // 4
-// TODO: make function work for modulo(-4, -2);
+// NOTE: this will not work for rational numbers
 var modulo = function(x, y) {
-  if(x === 0 && y === 0) return NaN;
-  if(x < y || (x < 0 && y < 0)){
+  if((typeof x !== 'number' && typeof y !== 'number') || y === 0) return NaN;
+
+  var X = x > 0 ? x : -x;
+  var Y = y > 0 ? y : -y; 
+  var ans = X - Y;
+   
+  if(X < Y){
     return x;
-  }else{
-    return modulo(x - y, y);
+  }else{ 
+    if(x < 0) ans = -ans;
+    return modulo(ans, y);
   }
 };
+
+// var modulo = function(x, y) {
+//   // if(x === 0 && y === 0) return NaN;
+//   // if(x < y || (x < 0 && y < 0)){
+//   //   return x;
+//   // }else{
+//   //   return modulo(x - y, y);
+//   // }
+// };
 
 // 12. Write a function that multiplies two numbers without using the * operator  or
 // JavaScript's Math object.
@@ -333,7 +348,7 @@ var fibonacci = function(n) {
 };
 
 //***************************************************************************
-  // alternate solution
+  // alternate solution - doesn't pass test because you have to recursively call fibonacci
     // var fibonacci = function(num) {
     //   let arr = [];
     //   let cache = {};
@@ -515,6 +530,7 @@ var numToText = function(str) {
 
 // 36. Return the number of times a tag occurs in the DOM.
 var tagCount = function(tag, node) {
+  // recursively accumulate count
 };
 
 // 37. Write a function for binary search.
@@ -522,10 +538,12 @@ var tagCount = function(tag, node) {
 // console.log(binarySearch(5)) will return '5'
 
 var binarySearch = function(array, target, min, max) {
+
 };
 
 // 38. Write a merge sort function.
 // Sample array:  [34,7,23,32,5,62]
 // Sample output: [5,7,23,32,34,62]
 var mergeSort = function(array) {
+
 };
