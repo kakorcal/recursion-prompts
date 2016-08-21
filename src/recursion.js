@@ -170,18 +170,36 @@ var multiply = function(x, y) {
 // JavaScript's Math object.
   // 8/2 === 8-2-2
   // 8/2 === count(2+2+2+2)
-// TODO: make function work for divide(-4, -2);
 var divide = function(x, y) {
-  if(x === 0 && y === 0) return NaN;
+  if((typeof x !== 'number' && typeof y !== 'number') || y === 0) return NaN;
+  var count = 0;
+  var X = x > 0 ? x : -x;
+  var Y = y > 0 ? y : -y;
+  var ans = X - Y;
 
-  if(x < y || (y < 0 && x > y)){
-    return 0;
-  }else if(x === y){
-    return 1;
-  }else{
-    return y > 0 ? 1 + divide(x - y, y) : -1 + divide(x + y, y);
+  if(X >= Y){
+    if(x < 0) ans = -ans;
+    if((x > 0 && y > 0) || (x < 0 && y < 0)){
+      count = divide(ans, y) + 1; 
+    }else{
+      count = divide(ans, y) - 1;
+    }
   }
+  return count;
 };
+
+
+// var divide = function(x, y) {
+//   if(x === 0 && y === 0) return NaN;
+
+//   if(x < y || (y < 0 && x > y)){
+//     return 0;
+//   }else if(x === y){
+//     return 1;
+//   }else{
+//     return y > 0 ? 1 + divide(x - y, y) : -1 + divide(x + y, y);
+//   }
+// };
 
 // 14. Find the greatest common divisor (gcd) of two positive numbers.  The GCD of two
 // integers is the greatest integer that divides both x and y with no remainder.
