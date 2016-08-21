@@ -96,6 +96,19 @@
     });
 
 
+    describe('38.5. Merge', function(){
+      var arr1 = [7,23,34];
+      var arr2 = [5,32,62];
+
+      it('should be defined as a function', function(){
+        expect(typeof merge).to.equal('function');
+      });
+
+      it('should merge two arrays', function(){
+        expect(merge(arr1, arr2)).to.eql([5,7,23,32,34,62]);
+      });
+    });
+
 
     describe('38. Merge Sort', function() {
       var numbers = [8,2,20,1,15];
